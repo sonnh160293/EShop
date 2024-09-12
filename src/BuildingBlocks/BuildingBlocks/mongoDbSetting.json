@@ -1,0 +1,15 @@
+{
+  "exclude": [
+    "**/bin",
+    "**/bower_components",
+    "**/jspm_packages",
+    "**/node_modules",
+    "**/obj",
+    "**/platforms"
+  ],
+  "MongoSettings": {
+    "ConnectionString": "mongodb://localhost:27017",
+    "DatabaseName": "EShop_Logging",
+    "LogsCollectionName": "Log"
+  }
+}

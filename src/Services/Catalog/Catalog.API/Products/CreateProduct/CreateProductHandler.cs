@@ -6,9 +6,14 @@ using Marten;
 namespace Catalog.API.Products.CreateProduct
 {
 
+    //request gửi đến trong mediatr
     public record CreateProductCommand(string Name, string Description, string ImageFile, double Price, List<string> Category) : ICommand<CreateProductResult>;
+
+    //response trả ra bởi mediatr
     public record CreateProductResult(Guid id);
 
+
+    //validate request
     public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
         public CreateProductCommandValidator()
@@ -20,7 +25,7 @@ namespace Catalog.API.Products.CreateProduct
         }
     }
 
-    public class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommand> logger)
+    public class CreateProductCommandHandler(IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -28,7 +33,7 @@ namespace Catalog.API.Products.CreateProduct
             try
             {
 
-                logger.LogInformation("CreateProductHandler. Handle called with {@Command}", command);
+
                 var product = new Product()
                 {
 
@@ -50,6 +55,7 @@ namespace Catalog.API.Products.CreateProduct
 
                 if (savedProduct != null)
                 {
+
                     // Product was successfully saved
                     return new CreateProductResult(product.Id);
                 }
