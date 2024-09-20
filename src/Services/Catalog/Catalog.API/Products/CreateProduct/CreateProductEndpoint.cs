@@ -40,7 +40,7 @@ namespace Catalog.API.Products.CreateProduct
                     //    ErrorMessage = ex.Message
                     //});
 
-                    // Return an appropriate error response
+
                     return Results.Problem(detail: ex.Message, statusCode: StatusCodes.Status500InternalServerError);
                 }
             })
